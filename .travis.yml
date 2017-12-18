@@ -77,7 +77,7 @@ env:
 matrix:
   include:
     - os: osx
-      osx_image: xcode8.2
+      osx_image: xcode8.3
       env: LLVM_VERSION=3.4 SOLVERS=STP:Z3 STP_VERSION=2.1.2 KLEE_UCLIBC=0 DISABLE_ASSERTIONS=0 ENABLE_OPTIMIZED=1 COVERAGE=0 USE_TCMALLOC=0
 
 addons:
@@ -107,7 +107,7 @@ before_install:
     ###########################################################################
     # Update package information
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew tap andreamattavelli/klee; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update && brew tap klee/klee; fi
     ###########################################################################
     # Set up out of source build directory
     ###########################################################################
@@ -123,7 +123,7 @@ before_install:
     - ${KLEE_SRC}/.travis/install-llvm-and-runtime-compiler.sh
     - ${KLEE_SRC}/.travis/install-tcmalloc.sh
     # Install lit (llvm-lit is not available)
-    - sudo pip install lit
+    - sudo pip2 install lit
     # Get SMT solvers
     - ${KLEE_SRC}/.travis/solvers.sh
     # Get needed utlities/libraries for testing KLEE
